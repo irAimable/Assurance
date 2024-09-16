@@ -1,0 +1,131 @@
+{% extends 'customer/base_layout_customer.html' %}
+<title>{% block title %} List des Categorie de Garanties | BICOR SANTE {% endblock %}</title>
+
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+
+        <div class="row">
+
+            <div class="mt-5">
+                                        <h5 class="mb-3">Upcoming Post</h5>
+                                        <div class="row ">
+                                            <a href="javascript: void(0);"  class="border rounded-3 m-1 p-1 col-xl-3 col-sm-6 list-group-item text-muted pb-3 pt-0 px-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <img src="assets/images/small/img-7.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                    </div>
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <h5 class="font-size-13 text-truncate">Beautiful Day with Friends</h5>
+                                                        <p class="mb-0 text-truncate">20 August, 2022 <span class="">/ 05:00 AM</span></p>
+                                                    </div>
+                                                    <div class="fs-1">
+                                                        <div class="form-check form-check-right mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="formCheckRight1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a href="javascript: void(0);" class="col-xl-3 col-sm-6 list-group-item text-muted py-3 px-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <img src="assets/images/small/img-2.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                    </div>
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <h5 class="font-size-13 text-truncate">Drawing a sketch</h5>
+                                                        <p class="mb-0 text-truncate">20 August, 2022 <span class="">/ 05:05 AM</span></p>
+                                                    </div>
+                                                    <div class="fs-1">
+                                                        <i class="mdi mdi-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a href="javascript: void(0);" class="col-xl-3 col-sm-6 list-group-item text-muted py-3 px-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <img src="assets/images/small/img-6.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                    </div>
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <h5 class="font-size-13 text-truncate">Project discussion with team</h5>
+                                                        <p class="mb-0 text-truncate">20 August, 2022 <span class="">/ 05:10 PM</span></p>
+                                                    </div>
+                                                    <div class="fs-1">
+                                                        <i class="mdi mdi-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a href="javascript: void(0);" class=" col-xl-3 col-sm-6 list-group-item text-muted py-3 px-2">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <img src="assets/images/small/img-1.jpg" alt="" class="avatar-lg h-auto d-block rounded">
+                                                    </div>
+                                                    <div class="flex-grow-1 overflow-hidden">
+                                                        <h5 class="font-size-13 text-truncate">Coffee with friends</h5>
+                                                        <p class="mb-0 text-truncate">20 August, 2022 <span class="">/ 05:30 PM</span></p>
+                                                    </div>
+                                                    <div class="fs-1">
+                                                        <i class="mdi mdi-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">List des Prestations Fournies</h4>
+                        <p class="card-title-desc d-none">DataTables has most features enabled by
+                            default, so all you need to do to use it with your own tables is to call
+                            the construction function: <code>$().DataTable();</code>.
+                        </p>
+                    </div>
+                    <div class="card-body">
+
+                        <table  class="table table-bordered table-striped dt-responsive  nowrap w-100">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>Assurance_id</th>
+                                    <th>Garanties</th>
+                                    <th>Prestations Fournies</th>
+                                    <th>Montant Maximal Assurable</th>
+                                    <th>Prime d'assurance.</th>
+                                    <th>Durée d'assurance</th>
+                                    <th>Ajouté Le</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for t in policies %}
+                                <tr>
+                                  <td> {{ forloop.counter }}</td>
+                                  <td> {{t.category}}</td>
+                                  <td> {{t.policy_name}}</td>
+                                  <td> {{t.sum_assurance}} fbu</td>
+                                  <td> {{t.premium}} fbu</td>
+                                  <td> {{t.tenure}} ans</td>
+                                  <td>{{t.creation_date}}</td>
+                                  <td><a class="btn btn-danger btn-xs" href="{% url 'apply' t.id  %}">Demander</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- end col -->
+        </div> <!-- end row -->
+
+    </div>
+    <!-- container-fluid -->
+</div>
+{% endblock %}

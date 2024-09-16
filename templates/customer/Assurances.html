@@ -1,0 +1,326 @@
+{% extends 'customer/base_layout_customer.html' %}
+<title>{% block title %} List des Categorie de Garanties | BICOR SANTE {% endblock %}</title>
+
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- <pre>{{ grouped_policies|pprint }}</pre> -->
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">List des Prestations Fournies</h4>
+                        <p class="card-title-desc">Choississez les garanties que vous voulez que BICOR Sante vous
+                            couvrez.
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="">
+                            {% for category, policies in grouped_policies.items %}
+                            <h5 class="my-3"><span class="me-2">Garantie</span>{{ category }}</h5>
+
+                            <div class="row g-1">
+                                {% for t in policies %}
+                                <div class="col-xl-6 col-sm-6 ">
+                                    <div class="border rounded-3 m-1 d-flex align-items-center px-3">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <h5 class="font-size-13  ">{{t.policy_name}}</h5>
+                                                <div class="fs-1">
+                                                    <div class="form-check form-check-right ">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="formCheckRight1" data-id="{{ t.id }}"
+                                                            data-name="{{ t.policy_name }}"
+                                                            data-premium="{{ t.premium }}"
+                                                            onchange="calculateTotal(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <div class="mb-2">
+                                                    <button type="button" class="btn btn-soft-secondary btn-sm my-1">
+                                                        Garantie :{{t.category}}
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-secondary btn-sm my-1">
+                                                        Montant Maximal Assurable : {{t.sum_assurance}} <span
+                                                            class="ml-1">Fbu</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm  my-1">
+                                                        Prime d'assurance : {{t.premium}} <span class="ml-1">Fbu</span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-soft-secondary btn-sm  my-1">
+                                                        Durée d'assurance : {{t.tenure}} <span class="ml-1">ans</span>
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                         
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- end col -->
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="invoice-title d-none">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <div class="mb-4">
+                                        <img src="assets/images/logo-sm.svg" alt="" height="24"><span
+                                            class="logo-txt">Minia</span>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="mb-4">
+                                        <h4 class="float-end font-size-16">Invoice # 12345</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <p class="mb-1">1874 County Line Road City, FL 33566</p>
+                            <p class="mb-1"><i class="mdi mdi-email align-middle me-1"></i> abc@123.com</p>
+                            <p><i class="mdi mdi-phone align-middle me-1"></i> 012-345-6789</p>
+                        </div>
+                        <hr class="my-4">
+                        <div class="row d-none">
+                            <div class="col-sm-6">
+                                <div>
+                                    <h5 class="font-size-15 mb-3">Billed To:</h5>
+                                    <h5 class="font-size-14 mb-2">Richard Saul</h5>
+                                    <p class="mb-1">1208 Sherwood Circle
+                                        Lafayette, LA 70506</p>
+                                    <p class="mb-1">RichardSaul@rhyta.com</p>
+                                    <p>337-256-9134</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div>
+                                    <div>
+                                        <h5 class="font-size-15">Order Date:</h5>
+                                        <p>February 16, 2020</p>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h5 class="font-size-15">Payment Method:</h5>
+                                        <p class="mb-1">Visa ending **** 4242</p>
+                                        <p>richards@email.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-2 mt-3">
+                            <h5 class="font-size-15">Resume de votre demande</h5>
+                        </div>
+                        <div class="p-4 border rounded">
+                            <div class="table-responsive">
+                                <table id="selected-policies-table" class="table table-nowrap align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 70px;">No.</th>
+                                            <th>Prestations Fournies</th>
+                                            <th class="text-end" style="width: 120px;">Price Estimatif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            <th scope="row" colspan="2" class="text-end">Sub Total</th>
+                                            <td class="text-end"><span id="total-amount">0</span><span
+                                                    class="ml-1">Fbu</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="2" class="border-0 text-end">
+                                                Tax</th>
+                                            <td class="border-0 text-end"><span id="total-taxes">0</span><span
+                                                    class="ml-1">Fbu</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" colspan="2" class="border-0 text-end">Total</th>
+                                            <td class="border-0 text-end">
+                                                <h4 class="m-0"><span id="total-general">0</span><span
+                                                        class="ml-1">Fbu</span></h4>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="d-print-none mt-3">
+                            <div class="float-end">
+                                <a href="javascript:window.print()"
+                                    class="btn btn-success waves-effect waves-light me-1"><i
+                                        class="fa fa-print"></i></a>
+                                <button type="button" class="btn btn-primary w-md waves-effect waves-light"
+                                    data-bs-toggle="modal" data-bs-target="#composemodal">
+                                    Demander Une
+                                    Audience
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- container-fluid -->
+</div>
+<!-- Modal -->
+<div class="modal fade" id="composemodal" tabindex="-1" role="dialog" aria-labelledby="composemodalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-size-16" id="composemodalTitle">Selectionner l'agence Bicor le plus proche
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-1">
+                    {% for t in agences %}
+                    <div class="col-xl-4 col-sm-6 ">
+                        <div class="border rounded-3 m-1 d-flex align-items-center px-3">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                    <h5 class="font-size-13  ">{{t.agence_name}}</h5>
+                                    <div class="fs-3">
+                                        <div class="form-check form-check-right ">
+                                            <input class="form-check-input agence-radio" type="radio" data-agence-name="{{ t.agence_name }}" data-agence-id="{{ t.id }}" name="agence_radio" onclick="handleRadioSelection(this)">   </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="Demander()">Demander <i
+                        class="fab fa-telegram-plane ms-1"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal -->
+
+<script>
+    var selectedPolicies = [];
+    var selectedAgence=null;
+    // Function to calculate total amount
+    function handleRadioSelection(radio) {
+    selectedAgence = {
+        id: radio.dataset.agenceId,
+        name: radio.dataset.agenceName
+    };
+    console.log('Selected agence:', selectedAgence);
+    // Send the selected agence to the Django backend
+}
+    function calculateTotal(checkbox) {
+        var policyId = $(checkbox).data('id');
+        var policyName = $(checkbox).data('name');
+        var premium = parseFloat($(checkbox).data('premium'));
+        var isChecked = $(checkbox).prop('checked');
+        if (isChecked) {
+            // Add policy to selectedPolicies array if checked
+            selectedPolicies.push({ id: policyId, name: policyName, premium: premium });
+            console.log(selectedPolicies)
+        } else {
+            // Remove policy from selectedPolicies array if unchecked
+            selectedPolicies = selectedPolicies.filter(function (policy) {
+                return policy.id !== policyId;
+            });
+            console.log(selectedPolicies)
+        }
+        var currentTotal = parseFloat($('#total-amount').text());
+        if (isChecked) {
+            currentTotal += premium;
+        } else {
+            currentTotal -= premium;
+        }
+        $('#total-amount').text(currentTotal);
+
+        // Apply additional calculation
+        var taxAmount = (currentTotal * 18) / 100;
+        $('#total-taxes').text(taxAmount);
+        var totalWithTax = currentTotal + taxAmount;
+
+        // Update the total amount with tax and display
+        $('#total-general').text(totalWithTax.toFixed(2));
+        updateSelectedPoliciesTable();
+    }
+
+    function updateSelectedPoliciesTable() {
+        var tableBody = $('#selected-policies-table tbody');
+        tableBody.empty();
+        selectedPolicies.forEach(function (policy) {
+            var row = '<tr>';
+            row += '<td>' + policy.id + '</td>';
+            row += '<td>' + policy.name + '</td>';
+            row += '<td>' + policy.premium.toFixed(2) + ' Fbu</td>'; // Format premium with two decimal places
+            row += '</tr>';
+            tableBody.append(row);
+        });
+    }
+
+
+    function getCsrfToken() {
+        var name = 'csrftoken';
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function Demander()
+    {
+        var total_amount = parseFloat($('#total-amount').text());
+        const jsonData = JSON.stringify({selectedPolicies,selectedAgence,total_amount});
+        console.log(jsonData)
+        fetch('/customer/apply-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
+            body: jsonData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+{% endblock %}

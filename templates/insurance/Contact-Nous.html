@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Assurance Rapide - Bicor </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+       
+        <!-- swiper css -->
+        <link rel="stylesheet" href="{% static 'assets/libs/swiper/swiper-bundle.min.css' %}">
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'assets/css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'assets/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>
+
+    <!-- <body data-layout="horizontal"> -->
+        <div class="preview-img overflow-hidden ">
+            <div class="swiper-container preview-thumb">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('{% static 'assets/images/assurance_voyage.jpg' %}');">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url(./assets/images/bg-2.jpg);"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url(./assets/images/bg-3.jpg);"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- preview bg -->
+
+        <div class="coming-content min-vh-100 py-4 px-3 py-sm-5">
+            <div class="bg-overlay bg-primary"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="text-center py-4 py-sm-5">
+
+                            <div class="mb-3 ">
+                                <a href="index.html">
+                                    <img src="{% static 'assets/images/Bicor_Logo.png' %}" alt="" height="100" class="me-1 bg-white rounded-circle"><span class="logo-txt text-white font-size-22">BICOR</span>
+                                </a>
+                            </div>
+                            <h3 class="text-white mt-3">Laissez Votre Message </h3>
+                        </div>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <div class="row justify-content-center">
+                    
+                <div class="col-xxl-5 col-lg-6 col-md-7">
+                    <div class="card">
+                        <div class="card-body overflow-hidden position-relative">
+                            <form method="POST" autocomplete="off">
+                                <!-- Very Important csrf Token -->
+                                {% csrf_token %}
+                                <div class="form-group">
+                                  <p>
+                                  <h3>{{ form.as_p }}</h3>
+                                  </p>
+                                  <br>
+                                  <input type="submit" value="Send Message" class='btn btn-primary btn-lg'>
+                                </div>
+                              </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+ 
+                            <form class="app-search mt-5 mx-auto">
+                               
+                            </form>
+
+                            <div class="mb-3 mt-3">
+                                <a class=" w-100 waves-effect waves-light text-white text-center" href="/" >Retour Sur l'Acceuil</a>
+                            </div>
+                            
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- coming-content -->
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'assets/libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'assets/libs/pace-js/pace.min.js' %}"></script>
+        <!-- swiper js -->
+        <script src="{% static 'assets/libs/swiper/swiper-bundle.min.js' %}"></script>
+        <!-- Plugins js-->
+        <script src="{% static 'assets/libs/jquery-countdown/jquery.countdown.min.js' %}"></script>
+
+        <!-- Countdown js -->
+        <script src="{% static 'assets/js/pages/coming-soon.init.js' %}"></script>
+    </body>
+</html>
